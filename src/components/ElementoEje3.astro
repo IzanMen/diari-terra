@@ -1,0 +1,96 @@
+<div id="story-box-3">
+    <h2 id="story-title-3">436 MILIONS D'ANYS ENRERE</h2>
+    <p id="story-text-3"></p>
+</div>
+
+<script>
+    const element_3 = document.querySelector('#story-box-3') as HTMLElement | null;
+    const storyText_3 = document.getElementById('story-text-3');
+    const story_3 = "La vida marina va molt bé. Cada cop hi ha més espècies. Han aparegut uns peixos amb mandíbula, els anomenem placoderms. També han començat a aparèixer uns taurons primitius. Els graptòlits, que quasi van desaparèixer durant l'extinció massiva, ara es multipliquen molt ràpid.";
+
+    let storyStarted_3 = false;
+
+    function typeWriter_3(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_3) {
+                storyText_3.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_3(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_3() {
+        if (element_3) {
+            element_3.style.transition = 'transform .5s ease-in-out';
+            element_3.style.transform = 'translateX(100vw)';
+
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    if (element_3) {
+        setTimeout(() => {
+            element_3.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_3.addEventListener('mouseover', () => {
+            element_3.style.position = 'fixed';
+            element_3.style.width = '100%';
+            element_3.style.height = '100vh';
+            element_3.style.borderRadius = '0';
+            element_3.style.top = '0';
+
+            const title_3 = element_3.querySelector('#story-title-3') as HTMLElement | null;
+            if (title_3) title_3.style.display = 'none';
+
+            if (storyText_3) {
+                storyText_3.style.display = 'block';
+                if (!storyStarted_3) {
+                    storyStarted_3 = true;
+                    typeWriter_3(story_3, 0, moveContainerRight_3);
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    #story-box-3 {
+        position: absolute;
+        top: calc(2000px + 240px + 1600px);
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-title-3 {
+        font-weight: 700;
+    }
+
+    #story-text-3 {
+        width: 80%;
+        font-size: 1.2rem;
+        display: none;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        text-align: center;
+    }
+</style>

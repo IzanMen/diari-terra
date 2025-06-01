@@ -1,0 +1,42 @@
+<span>0</span>
+
+<script>
+    const target = 444;
+    const duration = 2000;
+    const span = document.querySelector('.header-subtitle span');
+  
+    // Curva de easing exponencial: muy rápida al principio, muy lenta al final
+    function easeOutExpo(t: number) {
+      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+    }
+  
+    let start: number | null = null;
+  
+    function animate(timestamp: DOMHighResTimeStamp) {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutExpo(progress);
+      const current = Math.floor(eased * target);
+  
+      if (span) {
+        span.textContent = current.toString();
+      }
+  
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+  
+    // wait a second for start de function
+    setTimeout(() => {
+      requestAnimationFrame(animate);
+    }, 2000);
+</script>
+
+<style>
+    span {
+        font-size: 4rem;
+        font-weight: 700;
+    }
+</style>

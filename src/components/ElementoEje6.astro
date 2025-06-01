@@ -1,0 +1,96 @@
+<div id="story-box-6">
+    <h2 id="story-title-6">421 MILIONS D'ANYS ENRERE</h2>
+    <p id="story-text-6"></p>
+</div>
+
+<script>
+    const element_6 = document.querySelector('#story-box-6') as HTMLElement | null;
+    const storyText_6 = document.getElementById('story-text-6');
+    const story_6 = "Sembla que s’apropa el final del Silurià. Durant els darrers anys han defallit grans quantitats d’individus, i estàn desapareixent milers d’espècies. Sembla que no és una extinció massiva, com l’anterior, tot i així és un esdeveniment important en la història: l’esdeveniment Lau.";
+
+    let storyStarted_6 = false;
+
+    function typeWriter_6(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_6) {
+                storyText_6.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_6(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_6() {
+        if (element_6) {
+            element_6.style.transition = 'transform .5s ease-in-out';
+            element_6.style.transform = 'translateX(100vw)';
+
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    if (element_6) {
+        setTimeout(() => {
+            element_6.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_6.addEventListener('mouseover', () => {
+            element_6.style.position = 'fixed';
+            element_6.style.width = '100%';
+            element_6.style.height = '100vh';
+            element_6.style.borderRadius = '0';
+            element_6.style.top = '0';
+
+            const title_6 = element_6.querySelector('#story-title-6') as HTMLElement | null;
+            if (title_6) title_6.style.display = 'none';
+
+            if (storyText_6) {
+                storyText_6.style.display = 'block';
+                if (!storyStarted_6) {
+                    storyStarted_6 = true;
+                    typeWriter_6(story_6, 0, moveContainerRight_6);
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    #story-box-6 {
+        position: absolute;
+        top: calc(2000px + 240px + 1600px + 1770px + 1770px + 1790px); 
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-title-6 {
+        font-weight: 700;
+    }
+
+    #story-text-6 {
+        width: 80%;
+        font-size: 1.2rem;
+        display: none;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        text-align: center;
+    }
+</style>

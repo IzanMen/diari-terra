@@ -1,0 +1,96 @@
+<div id="story-box-4">
+    <h2 id="story-title-4">431 MILIONS D'ANYS ENRERE</h2>
+    <p id="story-text-4"></p>
+</div>
+
+<script>
+    const element_4 = document.querySelector('#story-box-4') as HTMLElement | null;
+    const storyText_4 = document.getElementById('story-text-4');
+    const story_4 = "A les zones de costa, molt a poc a poc, els primers éssers vius comencen a treure el cap fora de l’aigua. Hi ha plantes molt senzilles que intenten viure damunt terra. També hi ha alguns milpeus i altres formes primitives. Són molt pocs i no s’allunyen gaire de l'aigua.";
+
+    let storyStarted_4 = false;
+
+    function typeWriter_4(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_4) {
+                storyText_4.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_4(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_4() {
+        if (element_4) {
+            element_4.style.transition = 'transform .5s ease-in-out';
+            element_4.style.transform = 'translateX(100vw)';
+
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    if (element_4) {
+        setTimeout(() => {
+            element_4.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_4.addEventListener('mouseover', () => {
+            element_4.style.position = 'fixed';
+            element_4.style.width = '100%';
+            element_4.style.height = '100vh';
+            element_4.style.borderRadius = '0';
+            element_4.style.top = '0';
+
+            const title_4 = element_4.querySelector('#story-title-4') as HTMLElement | null;
+            if (title_4) title_4.style.display = 'none';
+
+            if (storyText_4) {
+                storyText_4.style.display = 'block';
+                if (!storyStarted_4) {
+                    storyStarted_4 = true;
+                    typeWriter_4(story_4, 0, moveContainerRight_4);
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    #story-box-4 {
+        position: absolute;
+        top: calc(2000px + 240px + 1600px + 1770px); 
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-title-4 {
+        font-weight: 700;
+    }
+
+    #story-text-4 {
+        width: 80%;
+        font-size: 1.2rem;
+        display: none;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        text-align: center;
+    }
+</style>

@@ -1,0 +1,97 @@
+<div id="story-box-2">
+    <h2 id="story-title-2">441 MILIONS D'ANYS ENRERE</h2>
+    <p id="story-text-2"></p>
+</div>
+
+<script>
+    const element_2 = document.querySelector('#story-box-2') as HTMLElement | null;
+    const storyText_2 = document.getElementById('story-text-2');
+    const story_2 = "Sembla que finalment la glaciació s’ha acabat del tot. Els gels s’han fos i el nivell del mar ha pujat molt. Moltes terres han quedat cobertes per aigua i hi ha mars poc profunds. El clima ara és molt més càlid i estable, tot i que de tant en tant es formen tempestes molt fortes, sobretot en mars calents.";
+
+    let storyStarted_2 = false;
+
+    function typeWriter_2(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_2) {
+                storyText_2.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_2(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_2() {
+        if (element_2) {
+            element_2.style.transition = 'transform .5s ease-in-out';
+            element_2.style.transform = 'translateX(100vw)';
+
+            // Esperamos a que termine la transición (0.5s), luego hacemos scroll
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500); // Coincide con la duración de la animación del contenedor
+        }
+    }
+
+    if (element_2) {
+        setTimeout(() => {
+            element_2.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_2.addEventListener('mouseover', () => {
+            element_2.style.position = 'fixed';
+            element_2.style.width = '100%';
+            element_2.style.height = '100vh';
+            element_2.style.borderRadius = '0';
+            element_2.style.top = '0';
+
+            const title_2 = element_2.querySelector('#story-title-2') as HTMLElement | null;
+            if (title_2) title_2.style.display = 'none';
+
+            if (storyText_2) {
+                storyText_2.style.display = 'block';
+                if (!storyStarted_2) {
+                    storyStarted_2 = true;
+                    typeWriter_2(story_2, 0, moveContainerRight_2);
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    #story-box-2 {
+        position: absolute;
+        top: 2000px;
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-title-2 {
+        font-weight: 700;
+    }
+
+    #story-text-2 {
+        width: 80%;
+        font-size: 1.2rem;
+        display: none;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        text-align: center;
+    }
+</style>
