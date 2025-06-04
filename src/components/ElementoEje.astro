@@ -1,0 +1,685 @@
+<!-- Elemento 1 -->
+<div id="story-box-1">
+    <h2 id="story-title-1">INICI DEL SILURIÀ</h2>
+    <div class="images-container" id="images-1">
+        <div class="image-box image-1">
+            <img src="/siluria-1.jpg" alt="Paisatge glacial del Silúric inicial">
+        </div>
+        <div class="image-box image-2">
+            <img src="/siluria-2.jpg" alt="Vida marina primitiva">
+        </div>
+    </div>
+    <p id="story-text-1"></p>
+</div>
+
+<!-- Elemento 2 -->
+<div id="story-box-2">
+    <h2 id="story-title-2">441 MILIONS D'ANYS ENRERE</h2>
+    <div class="images-container" id="images-2">
+        <div class="image-box image-1">
+            <img src="siluria-3.jpg" alt="Mars poc profunds">
+        </div>
+        <div class="image-box image-2">
+            <img src="siluria-4.jpg" alt="Tempesta marina">
+        </div>
+    </div>
+    <p id="story-text-2"></p>
+</div>
+
+<!-- Elemento 3 -->
+<div id="story-box-3">
+    <h2 id="story-title-3">436 MILIONS D'ANYS ENRERE</h2>
+    <div class="images-container" id="images-3">
+        <div class="image-box image-1">
+            <img src="siluria-5.jpg" alt="Placoderm primitiu">
+        </div>
+        <div class="image-box image-2">
+            <img src="siluria-6.jpg" alt="Taurons primitius">
+        </div>
+    </div>
+    <p id="story-text-3"></p>
+</div>
+
+<!-- Elemento 4 -->
+<div id="story-box-4">
+    <h2 id="story-title-4">431 MILIONS D'ANYS ENRERE</h2>
+    <div class="images-container" id="images-4">
+        <div class="image-box image-1">
+            <img src="siluria-7.jpg" alt="Primeres plantes terrestres">
+        </div>
+        <div class="image-box image-2">
+            <img src="siluria-8.jpg" alt="Milpeus primitius">
+        </div>
+    </div>
+    <p id="story-text-4"></p>
+</div>
+
+<!-- Elemento 5 -->
+<div id="story-box-5">
+    <h2 id="story-title-5">426 MILIONS D'ANYS ENRERE</h2>
+    <div class="images-container" id="images-5">
+        <div class="image-box image-1">
+            <img src="siluria-9.jpg" alt="Formació de muntanyes">
+        </div>
+        <div class="image-box image-2">
+            <img src="siluria-10.jpg" alt="Deriva continental">
+        </div>
+    </div>
+    <p id="story-text-5"></p>
+</div>
+
+<!-- Elemento 6 -->
+<div id="story-box-6">
+    <h2 id="story-title-6">421 MILIONS D'ANYS ENRERE</h2>
+    <div class="images-container" id="images-6">
+        <div class="image-box image-1">
+            <img src="siluria-11.jpg" alt="Extinció d'espècies">
+        </div>
+        <div class="image-box image-2">
+            <img src="siluria-12.jpg" alt="Esdeveniment Lau">
+        </div>
+    </div>
+    <p id="story-text-6"></p>
+</div>
+
+<!-- Elementos de audio (ocultos) -->
+<audio id="audio-1" preload="auto">
+    <source src="/audio/siluria-inicio.mp3" type="audio/mpeg">
+    <source src="/audio/siluria-inicio.ogg" type="audio/ogg">
+    <source src="/audio/siluria-inicio.wav" type="audio/wav">
+</audio>
+
+<audio id="audio-2" preload="auto">
+    <source src="/audio/siluria-441.mp3" type="audio/mpeg">
+    <source src="/audio/siluria-441.ogg" type="audio/ogg">
+    <source src="/audio/siluria-441.wav" type="audio/wav">
+</audio>
+
+<audio id="audio-3" preload="auto">
+    <source src="/audio/siluria-436.mp3" type="audio/mpeg">
+    <source src="/audio/siluria-436.ogg" type="audio/ogg">
+    <source src="/audio/siluria-436.wav" type="audio/wav">
+</audio>
+
+<audio id="audio-4" preload="auto">
+    <source src="/audio/siluria-431.mp3" type="audio/mpeg">
+    <source src="/audio/siluria-431.ogg" type="audio/ogg">
+    <source src="/audio/siluria-431.wav" type="audio/wav">
+</audio>
+
+<audio id="audio-5" preload="auto">
+    <source src="/audio/siluria-426.mp3" type="audio/mpeg">
+    <source src="/audio/siluria-426.ogg" type="audio/ogg">
+    <source src="/audio/siluria-426.wav" type="audio/wav">
+</audio>
+
+<audio id="audio-6" preload="auto">
+    <source src="/audio/siluria-421.mp3" type="audio/mpeg">
+    <source src="/audio/siluria-421.ogg" type="audio/ogg">
+    <source src="/audio/siluria-421.wav" type="audio/wav">
+</audio>
+
+<script>
+    // Control global de audio
+    let currentAudio: HTMLAudioElement | null = null;
+
+    // Función para detener cualquier audio que esté reproduciéndose
+    function stopCurrentAudio() {
+        if (currentAudio && !currentAudio.paused) {
+            currentAudio.pause();
+            currentAudio.currentTime = 0;
+        }
+    }
+
+    // Función para reproducir audio
+    function playAudio(audioId: string) {
+        stopCurrentAudio();
+        
+        const audio = document.getElementById(audioId) as HTMLAudioElement;
+        if (audio) {
+            currentAudio = audio;
+            audio.currentTime = 0; // Reiniciar desde el principio
+            
+            // Reproducir el audio
+            audio.play().catch(error => {
+                console.warn('Error al reproducir audio:', error);
+                console.log('Es posible que necesites interactuar con la página primero para permitir la reproducción automática.');
+            });
+        }
+    }
+
+    // Elemento 1
+    const element_1 = document.querySelector('#story-box-1') as HTMLElement | null;
+    const storyText_1 = document.getElementById('story-text-1') as HTMLElement | null;
+    const imagesContainer_1 = document.getElementById('images-1') as HTMLElement | null;
+    const story_1 = "Ja fa uns 96 milions d'anys des de l'inici del Paleozoic, que ràpid passa el temps… sembla que va ser ahir quan van aparèixer els primers invertebrats, pero no, ja fa 97 milions d'anys. Durant aquest temps han succeït moltes coses, tot i que la vida terrestre no s'ha desenvolupat gaire, la vida marina ha patit un gran desenvolupament. Cal dir que no fa gaire hi va haver una extinció massiva d'espècies. Estic en plena glaciació i fa molt de fred, però sembla que la temperatura torna a pujar cap a un clima més càlid.";
+    let storyStarted_1 = false;
+
+    function typeWriter_1(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_1) {
+                storyText_1.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_1(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_1() {
+        if (element_1) {
+            element_1.style.transition = 'transform .5s ease-in-out';
+            element_1.style.transform = 'translateX(100vw)';
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    // Elemento 2
+    const element_2 = document.querySelector('#story-box-2') as HTMLElement | null;
+    const storyText_2 = document.getElementById('story-text-2');
+    const imagesContainer_2 = document.getElementById('images-2') as HTMLElement | null;
+    const story_2 = "Sembla que finalment la glaciació s'ha acabat del tot. Els gels s'han fos i el nivell del mar ha pujat molt. Moltes terres han quedat cobertes per aigua i hi ha mars poc profunds. El clima ara és molt més càlid i estable, tot i que de tant en tant es formen tempestes molt fortes, sobretot en mars calents.";
+    let storyStarted_2 = false;
+
+    function typeWriter_2(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_2) {
+                storyText_2.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_2(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_2() {
+        if (element_2) {
+            element_2.style.transition = 'transform .5s ease-in-out';
+            element_2.style.transform = 'translateX(100vw)';
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    // Elemento 3
+    const element_3 = document.querySelector('#story-box-3') as HTMLElement | null;
+    const storyText_3 = document.getElementById('story-text-3');
+    const imagesContainer_3 = document.getElementById('images-3') as HTMLElement | null;
+    const story_3 = "La vida marina va molt bé. Cada cop hi ha més espècies. Han aparegut uns peixos amb mandíbula, els anomenem placoderms. També han començat a aparèixer uns taurons primitius. Els graptòlits, que quasi van desaparèixer durant l'extinció massiva, ara es multipliquen molt ràpid.";
+    let storyStarted_3 = false;
+
+    function typeWriter_3(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_3) {
+                storyText_3.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_3(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_3() {
+        if (element_3) {
+            element_3.style.transition = 'transform .5s ease-in-out';
+            element_3.style.transform = 'translateX(100vw)';
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    // Elemento 4
+    const element_4 = document.querySelector('#story-box-4') as HTMLElement | null;
+    const storyText_4 = document.getElementById('story-text-4');
+    const imagesContainer_4 = document.getElementById('images-4') as HTMLElement | null;
+    const story_4 = "A les zones de costa, molt a poc a poc, els primers éssers vius comencen a treure el cap fora de l'aigua. Hi ha plantes molt senzilles que intenten viure damunt terra. També hi ha alguns milpeus i altres formes primitives. Són molt pocs i no s'allunyen gaire de l'aigua.";
+    let storyStarted_4 = false;
+
+    function typeWriter_4(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_4) {
+                storyText_4.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_4(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_4() {
+        if (element_4) {
+            element_4.style.transition = 'transform .5s ease-in-out';
+            element_4.style.transform = 'translateX(100vw)';
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    // Elemento 5
+    const element_5 = document.querySelector('#story-box-5') as HTMLElement | null;
+    const storyText_5 = document.getElementById('story-text-5');
+    const imagesContainer_5 = document.getElementById('images-5') as HTMLElement | null;
+    const story_5 = "Els continents no aturen de moure's. Laurentia, Baltica i Avalònia s'han anat apropant molt. De xocar, han començat a formar-se muntanyes, i en uns anys, segurament aquestes muntanyes acabaran formant un gran continent: Euramèrica. Encara no està del tot fet, però falta poc.";
+    let storyStarted_5 = false;
+
+    function typeWriter_5(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_5) {
+                storyText_5.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_5(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_5() {
+        if (element_5) {
+            element_5.style.transition = 'transform .5s ease-in-out';
+            element_5.style.transform = 'translateX(100vw)';
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    // Elemento 6
+    const element_6 = document.querySelector('#story-box-6') as HTMLElement | null;
+    const storyText_6 = document.getElementById('story-text-6');
+    const imagesContainer_6 = document.getElementById('images-6') as HTMLElement | null;
+    const story_6 = "Sembla que s'apropa el final del Silurià. Durant els darrers anys han defallit grans quantitats d'individus, i estàn desapareixent milers d'espècies. Sembla que no és una extinció massiva, com l'anterior, tot i així és un esdeveniment important en la història: l'esdeveniment Lau.";
+    let storyStarted_6 = false;
+
+    function typeWriter_6(text: string, index = 0, onComplete?: () => void) {
+        if (index < text.length) {
+            if (storyText_6) {
+                storyText_6.textContent += text.charAt(index);
+            }
+            setTimeout(() => typeWriter_6(text, index + 1, onComplete), 50);
+        } else if (onComplete) {
+            setTimeout(onComplete, 2000);
+        }
+    }
+
+    function moveContainerRight_6() {
+        if (element_6) {
+            element_6.style.transition = 'transform .5s ease-in-out';
+            element_6.style.transform = 'translateX(100vw)';
+            setTimeout(() => {
+                window.scrollTo({
+                    top: window.scrollY + 1800,
+                    behavior: 'smooth'
+                });
+            }, 500);
+        }
+    }
+
+    // Event listeners para todos los elementos
+    if (element_1) {
+        setTimeout(() => {
+            element_1.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_1.addEventListener('mouseover', () => {
+            element_1.style.position = 'fixed';
+            element_1.style.width = '100%';
+            element_1.style.height = '100vh';
+            element_1.style.borderRadius = '0';
+            element_1.style.top = '0';
+
+            const title_1 = element_1.querySelector('#story-title-1') as HTMLElement | null;
+            if (title_1) title_1.style.display = 'none';
+
+            if (imagesContainer_1) imagesContainer_1.style.display = 'block';
+
+            if (storyText_1) {
+                storyText_1.style.display = 'block';
+                if (!storyStarted_1) {
+                    storyStarted_1 = true;
+                    playAudio('audio-1');
+                    typeWriter_1(story_1, 0, moveContainerRight_1);
+                }
+            }
+        });
+    }
+
+    if (element_2) {
+        setTimeout(() => {
+            element_2.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_2.addEventListener('mouseover', () => {
+            element_2.style.position = 'fixed';
+            element_2.style.width = '100%';
+            element_2.style.height = '100vh';
+            element_2.style.borderRadius = '0';
+            element_2.style.top = '0';
+
+            const title_2 = element_2.querySelector('#story-title-2') as HTMLElement | null;
+            if (title_2) title_2.style.display = 'none';
+
+            if (imagesContainer_2) imagesContainer_2.style.display = 'block';
+
+            if (storyText_2) {
+                storyText_2.style.display = 'block';
+                if (!storyStarted_2) {
+                    storyStarted_2 = true;
+                    playAudio('audio-2');
+                    typeWriter_2(story_2, 0, moveContainerRight_2);
+                }
+            }
+        });
+    }
+
+    if (element_3) {
+        setTimeout(() => {
+            element_3.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_3.addEventListener('mouseover', () => {
+            element_3.style.position = 'fixed';
+            element_3.style.width = '100%';
+            element_3.style.height = '100vh';
+            element_3.style.borderRadius = '0';
+            element_3.style.top = '0';
+
+            const title_3 = element_3.querySelector('#story-title-3') as HTMLElement | null;
+            if (title_3) title_3.style.display = 'none';
+
+            if (imagesContainer_3) imagesContainer_3.style.display = 'block';
+
+            if (storyText_3) {
+                storyText_3.style.display = 'block';
+                if (!storyStarted_3) {
+                    storyStarted_3 = true;
+                    playAudio('audio-3');
+                    typeWriter_3(story_3, 0, moveContainerRight_3);
+                }
+            }
+        });
+    }
+
+    if (element_4) {
+        setTimeout(() => {
+            element_4.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_4.addEventListener('mouseover', () => {
+            element_4.style.position = 'fixed';
+            element_4.style.width = '100%';
+            element_4.style.height = '100vh';
+            element_4.style.borderRadius = '0';
+            element_4.style.top = '0';
+
+            const title_4 = element_4.querySelector('#story-title-4') as HTMLElement | null;
+            if (title_4) title_4.style.display = 'none';
+
+            if (imagesContainer_4) imagesContainer_4.style.display = 'block';
+
+            if (storyText_4) {
+                storyText_4.style.display = 'block';
+                if (!storyStarted_4) {
+                    storyStarted_4 = true;
+                    playAudio('audio-4');
+                    typeWriter_4(story_4, 0, moveContainerRight_4);
+                }
+            }
+        });
+    }
+
+    if (element_5) {
+        setTimeout(() => {
+            element_5.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_5.addEventListener('mouseover', () => {
+            element_5.style.position = 'fixed';
+            element_5.style.width = '100%';
+            element_5.style.height = '100vh';
+            element_5.style.borderRadius = '0';
+            element_5.style.top = '0';
+
+            const title_5 = element_5.querySelector('#story-title-5') as HTMLElement | null;
+            if (title_5) title_5.style.display = 'none';
+
+            if (imagesContainer_5) imagesContainer_5.style.display = 'block';
+
+            if (storyText_5) {
+                storyText_5.style.display = 'block';
+                if (!storyStarted_5) {
+                    storyStarted_5 = true;
+                    playAudio('audio-5');
+                    typeWriter_5(story_5, 0, moveContainerRight_5);
+                }
+            }
+        });
+    }
+
+    if (element_6) {
+        setTimeout(() => {
+            element_6.style.filter = 'opacity(1)';
+        }, 6500);
+
+        element_6.addEventListener('mouseover', () => {
+            element_6.style.position = 'fixed';
+            element_6.style.width = '100%';
+            element_6.style.height = '100vh';
+            element_6.style.borderRadius = '0';
+            element_6.style.top = '0';
+
+            const title_6 = element_6.querySelector('#story-title-6') as HTMLElement | null;
+            if (title_6) title_6.style.display = 'none';
+
+            if (imagesContainer_6) imagesContainer_6.style.display = 'block';
+
+            if (storyText_6) {
+                storyText_6.style.display = 'block';
+                if (!storyStarted_6) {
+                    storyStarted_6 = true;
+                    playAudio('audio-6');
+                    typeWriter_6(story_6, 0, moveContainerRight_6);
+                }
+            }
+        });
+    }
+</script>
+
+<style>
+    * {
+        text-align: left !important;
+    }
+
+    #story-box-1 {
+        position: absolute;
+        top: 240px;
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-box-2 {
+        position: absolute;
+        top: 2000px;
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-box-3 {
+        position: absolute;
+        top: calc(2000px + 240px + 1600px);
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-box-4 {
+        position: absolute;
+        top: calc(2000px + 240px + 1600px + 1770px);
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-box-5 {
+        position: absolute;
+        top: calc(2000px + 240px + 1600px + 1770px + 1770px);
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-box-6 {
+        position: absolute;
+        top: calc(2000px + 240px + 1600px + 1770px + 1770px + 1790px);
+        width: 500px;
+        height: 180px;
+        background-color: #fff;
+        color: #000;
+        left: 0;
+        right: 0;
+        margin: auto;
+        display: flex;
+        filter: opacity(0);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        transition: all 1s ease-in-out;
+    }
+
+    #story-title-1, #story-title-2, #story-title-3, 
+    #story-title-4, #story-title-5, #story-title-6 {
+        font-weight: 700;
+    }
+
+    #story-text-1, #story-text-2, #story-text-3,
+    #story-text-4, #story-text-5, #story-text-6 {
+        width: 80%;
+        font-size: 1.2rem;
+        display: none;
+        white-space: pre-wrap;
+        line-height: 1.5;
+        text-align: center;
+        margin-top: 220px;
+        z-index: 5;
+    }
+
+    /* Contenedores de imágenes */
+    .images-container {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: 200px;
+        z-index: 10;
+    }
+
+    .image-box {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        border: 3px solid #fff;
+    }
+
+    .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .image-1 {
+        left: 10%;
+        top: 10px;
+    }
+
+    .image-2 {
+        right: 10%;
+        top: 10px;
+    }
+
+    /* Ocultar elementos de audio */
+    audio {
+        display: none;
+    }
+</style>
